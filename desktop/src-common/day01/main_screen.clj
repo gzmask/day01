@@ -1,9 +1,16 @@
 (ns day01.main-screen
   (:import (javax.imageIO))
   (:require
+   [day01.char-keyboard :as charkey]
    [play-clj.core :refer :all]
    [play-clj.ui :refer :all]
    [play-clj.g2d :refer :all]))
+
+;(ns day01.core)
+;(declare day01 title-screen)
+;(ns day01.main-screen)
+(def screen-width 800)
+(def screen-height 600)
 
 (comment
   (def img (javax.imageio.ImageIO/read  (java.io.File. "resources/day01-logo.jpg")))
@@ -28,13 +35,38 @@
       (for [y (range w)]
         (.getRGB img x y)))))
 
+(defn place-char [w h]
+  (assoc (texture "char.gif")
+   :x (- (/ screen-width 2) (/ w 2))
+   :y (- (/ screen-height 2) (/ h 2))
+   :width w
+   :height h
+   :guid :char))
+
 (defscreen main-screen
   :on-show
   (fn [screen entities]
     (update! screen :renderer (stage))
-    (label "Hello world!" (color :white)))
+    (place-char 50 76))
 
   :on-render
   (fn [screen entities]
     (clear!)
-    (render! screen entities)))
+    (render! screen entities))
+
+  :on-key-down
+  (fn [screen entities]
+    (cond
+     (= (:key screen) (key-code :dpad-up))
+     (charkey/key-up entities)
+     (= (:key screen) (key-code :dpad-down))
+     (charkey/key-down entities)
+     (= (:key screen) (key-code :dpad-left))
+     (charkey/key-left entities)
+     (= (:key screen) (key-code :dpad-right))
+     (charkey/key-right entities)
+     ;(= (:key screen) (key-code :escape))
+     ;(set-screen! day01.core/day01 day01.core/title-screen)
+     )
+    )
+  )
