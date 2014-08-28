@@ -1,11 +1,11 @@
 (ns day01.core
   (:require
    [day01.enter-menu :as menu]
+   [day01.main-screen :as main]
    [play-clj.core :refer :all]
-   [play-clj.ui :refer :all]
-   [play-clj.g2d :refer :all]))
+   [play-clj.ui :refer :all]))
 
-(declare day01 title-screen main-screen)
+(declare day01)
 (def screen-width 800)
 (def screen-height 600)
 
@@ -36,23 +36,12 @@
      (= (:key screen) (key-code :dpad-down))
      (menu/key-end-bn entities)
      (= (:key screen) (key-code :enter))
-     (menu/key-enter entities day01 main-screen)
+     (menu/key-enter entities day01 main/main-screen)
      (= (:key screen) (key-code :dpad-right))
      (println "right")
      (= (:key screen) (key-code :dpad-left))
      (println "left")))
 )
-
-(defscreen main-screen
-  :on-show
-  (fn [screen entities]
-    (update! screen :renderer (stage))
-    (label "Hello world!" (color :white)))
-
-  :on-render
-  (fn [screen entities]
-    (clear!)
-    (render! screen entities)))
 
 (defgame day01
   :on-create

@@ -8,3 +8,5 @@
   []
   (LwjglApplication. day01 "day01" 800 600)
   (Keyboard/enableRepeatEvents true))
+
+;(-main)

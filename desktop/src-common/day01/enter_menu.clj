@@ -78,9 +78,10 @@
 (defn key-enter [entities this-game main-screen]
   (map
    (fn [entity]
-     (if (and
-          (= (:guid entity) :start-bn)
-          (:select entity))
-       (set-screen! this-game main-screen)
-       entity))
+     (cond
+      (and (= (:guid entity) :start-bn) (:select entity))
+      (set-screen! this-game main-screen)
+      (and (= (:guid entity) :end-bn) (:select entity))
+      (System/exit 0)
+      :else entity))
    entities))
