@@ -6,7 +6,5 @@
 
 (defn -main
   []
-  (LwjglApplication. day01 "day01" screen-width screen-height)
+  (LwjglApplication. day01 "day01" 800 600)
   (Keyboard/enableRepeatEvents true))
-
-;(-main)
