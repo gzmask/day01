@@ -2,37 +2,45 @@
   (:require [play-clj.core :refer :all]
             [play-clj.g2d :refer :all]))
 
-(def speed {:x 10 :y 10})
+(def speed {:x 3 :y 3})
 
 (defn key-up [entities]
   (map (fn [entity]
-         (if (= :char (:guid entity))
+         (if (and (not (:collide? entity)) (= :char (:guid entity)))
            (assoc entity
-             :y (+ (:y entity) (:y speed)))))
+             :oldy (:y entity)
+             :y (+ (:y entity) (:y speed)))
+         entity))
        entities)
   )
 
 (defn key-down [entities]
   (map (fn [entity]
-         (if (= :char (:guid entity))
+         (if (and (not (:collide? entity)) (= :char (:guid entity)))
            (assoc entity
-             :y (- (:y entity) (:y speed)))))
+             :oldy (:y entity)
+             :y (- (:y entity) (:y speed)))
+           entity))
        entities)
   )
 
 (defn key-left [entities]
   (map (fn [entity]
-         (if (= :char (:guid entity))
+         (if (and (not (:collide? entity)) (= :char (:guid entity)))
            (assoc entity
-             :x (- (:x entity) (:x speed)))))
+             :oldx (:x entity)
+             :x (- (:x entity) (:x speed)))
+           entity))
        entities)
   )
 
 (defn key-right [entities]
   (map (fn [entity]
-         (if (= :char (:guid entity))
+         (if (and (not (:collide? entity)) (= :char (:guid entity)))
            (assoc entity
-             :x (+ (:x entity) (:x speed)))))
+             :oldx (:x entity)
+             :x (+ (:x entity) (:x speed)))
+           entity))
        entities)
   )
 
