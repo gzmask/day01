@@ -17,7 +17,9 @@
 (defscreen main-screen
   :on-show
   (fn [screen entities]
-    (update! screen :renderer (stage))
+    (update! screen
+             :camera (orthographic)
+             :renderer (stage))
     (place-char 50 76))
 
   :on-render
@@ -31,4 +33,8 @@
   (fn [screen entities]
     (cond
      (= (:key screen) (key-code :escape)) (System/exit 0)))
+
+  :on-resize
+  (fn [screen entities]
+    (height! screen 600))
   )

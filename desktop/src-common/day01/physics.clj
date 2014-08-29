@@ -1,5 +1,6 @@
 (ns day01.physics)
 
+(comment
   (def img (javax.imageio.ImageIO/read  (java.io.File. "resources/walltilemap.bmp")))
   (use 'clojure.repl)
   (use 'clojure.pprint)
@@ -12,7 +13,7 @@
   (doc for)
   (range 50)
   (make-2d-list "resources/walltilemap.bmp")
-
+)
 
 (defn make-2d-list [file-str]
   "this function shows how easy to get pixel value"

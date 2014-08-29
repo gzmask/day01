@@ -46,4 +46,3 @@
   (fn [this]
     (set-screen! this title-screen)))
 
-;(on-gl (set-screen! day01 title-screen))
