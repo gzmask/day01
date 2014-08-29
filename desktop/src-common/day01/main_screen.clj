@@ -6,9 +6,6 @@
    [play-clj.ui :refer :all]
    [play-clj.g2d :refer :all]))
 
-;(ns day01.core)
-;(declare day01 title-screen)
-;(ns day01.main-screen)
 (def screen-width 800)
 (def screen-height 600)
 
@@ -65,8 +62,8 @@
      (charkey/key-left entities)
      (= (:key screen) (key-code :dpad-right))
      (charkey/key-right entities)
-     ;(= (:key screen) (key-code :escape))
-     ;(set-screen! day01.core/day01 day01.core/title-screen)
+     (= (:key screen) (key-code :escape))
+     (System/exit 0)
      )
     )
   )
