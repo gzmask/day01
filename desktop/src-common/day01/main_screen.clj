@@ -9,28 +9,6 @@
 (def screen-width 800)
 (def screen-height 600)
 
-(comment
-  (def img (javax.imageio.ImageIO/read  (java.io.File. "resources/day01-logo.jpg")))
-  (use 'clojure.pprint)
-  (use 'clojure.java.javadoc)
-  (pprint (.getRGB img 12 26))
-  (pprint (.getHeight img))
-  (pprint (.getWidth img))
-  (javadoc (.getData img))
-  (javadoc img)
-  (doc for)
-  (range 50)
-  (make-2d-list "resources/day01-logo.jpg"))
-
-
-(defn make-2d-list [file-str]
-  "this function shows how easy to get pixel value"
-  (let [img (javax.imageio.ImageIO/read  (java.io.File. file-str))
-        h (.getHeight img)
-        w (.getWidth img)]
-    (for [x (range h)]
-      (for [y (range w)]
-        (.getRGB img x y)))))
 
 (defn place-char [w h]
   (assoc (texture "char.gif")
@@ -49,21 +27,12 @@
   :on-render
   (fn [screen entities]
     (clear!)
-    (render! screen entities))
+    (->> entities
+         charkey/key-control
+         (render! screen)))
 
   :on-key-down
   (fn [screen entities]
     (cond
-     (= (:key screen) (key-code :dpad-up))
-     (charkey/key-up entities)
-     (= (:key screen) (key-code :dpad-down))
-     (charkey/key-down entities)
-     (= (:key screen) (key-code :dpad-left))
-     (charkey/key-left entities)
-     (= (:key screen) (key-code :dpad-right))
-     (charkey/key-right entities)
-     (= (:key screen) (key-code :escape))
-     (System/exit 0)
-     )
-    )
+     (= (:key screen) (key-code :escape)) (System/exit 0)))
   )
