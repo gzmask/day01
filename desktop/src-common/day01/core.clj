@@ -6,8 +6,6 @@
    [play-clj.ui :refer :all]))
 
 (declare day01)
-(def screen-width 800)
-(def screen-height 600)
 
 (defscreen title-screen
   :on-show

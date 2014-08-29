@@ -2,14 +2,12 @@
   (:require [play-clj.core :refer :all]
             [play-clj.g2d :refer :all]))
 
-(def screen-width 800)
-(def screen-height 600)
 ;screen components for enter menu
 
 (defn place-logo [w h]
   (merge (texture "day01-logo.png")
-   {:x (- (/ screen-width 2) (/ w 2))
-    :y (- (/ screen-height 2) (/ h 2))
+   {:x (- (/ (game :width) 2) (/ w 2))
+    :y (- (/ (game :height) 2) (/ h 2))
     :width w
     :height h
     :guid :logo
@@ -18,8 +16,8 @@
 (defn place-end-bn [w h]
   (merge
    (texture "end.png")
-   {:x (- (/ screen-width 2) (/ w 2))
-    :y (- (/ screen-height 2) (/ h 2) 190)
+   {:x (- (/ (game :width) 2) (/ w 2))
+    :y (- (/ (game :height) 2) (/ h 2) 190)
     :width w
     :height h
     :guid :end-bn
@@ -28,8 +26,8 @@
 (defn place-start-bn [w h]
   (merge
    (texture "start.png")
-   {:x (- (/ screen-width 2) (/ w 2))
-    :y (- (/ screen-height 2) (/ h 2) 150)
+   {:x (- (/ (game :width) 2) (/ w 2))
+    :y (- (/ (game :height) 2) (/ h 2) 150)
     :width w
     :height h
     :guid :start-bn

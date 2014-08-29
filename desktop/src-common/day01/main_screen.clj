@@ -6,14 +6,10 @@
    [play-clj.ui :refer :all]
    [play-clj.g2d :refer :all]))
 
-(def screen-width 800)
-(def screen-height 600)
-
-
 (defn place-char [w h]
   (assoc (texture "char.gif")
-   :x (- (/ screen-width 2) (/ w 2))
-   :y (- (/ screen-height 2) (/ h 2))
+   :x (- (/ (game :width) 2) (/ w 2))
+   :y (- (/ (game :height) 2) (/ h 2))
    :width w
    :height h
    :guid :char))
